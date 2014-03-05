@@ -47,7 +47,19 @@ class Facebook extends Provider
 			),
 		);
 	}
-	
+
+	public function get_friends(Token_Access $token)
+	{
+		$url = 'https://graph.facebook.com/me/friends?'.http_build_query(array(
+			'fields'=>'id',
+			'access_token' => $token->access_token
+		));
+
+		$friends = json_decode(file_get_contents($url));
+
+		return $friends;
+	}
+
 	public function get_user(Token_Access $token)
 	{
 		$url = 'https://graph.facebook.com/me?'.http_build_query(array(
@@ -55,7 +67,7 @@ class Facebook extends Provider
 		));
 
 		$user = json_decode(file_get_contents($url), true);
-		
+
 		return $user;
 	}
 }
