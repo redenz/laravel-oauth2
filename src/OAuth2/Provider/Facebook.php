@@ -50,10 +50,7 @@ class Facebook extends Provider
 
 	public function get_friends(Token_Access $token)
 	{
-		$url = 'https://graph.facebook.com/me/friends?'.http_build_query(array(
-			'fields'=>'id',
-			'access_token' => $token->access_token
-		));
+		$url = 'https://graph.facebook.com/me/friends?fields=id&access_token='.$token->access_token;
 
 		$friends = json_decode(file_get_contents($url));
 
